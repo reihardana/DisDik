@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 31 Des 2017 pada 17.16
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Waktu pembuatan: 28 Jan 2020 pada 18.34
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,6 +21,52 @@ SET time_zone = "+00:00";
 --
 -- Database: `cigenerator`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `surat_keluar`
+--
+
+CREATE TABLE `surat_keluar` (
+  `id_keluar` int(16) NOT NULL,
+  `nomor_surat` varchar(30) NOT NULL,
+  `perihal` varchar(50) NOT NULL,
+  `tanggal` date NOT NULL,
+  `penerima` varchar(50) NOT NULL,
+  `pengirim` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `surat_keluar`
+--
+
+INSERT INTO `surat_keluar` (`id_keluar`, `nomor_surat`, `perihal`, `tanggal`, `penerima`, `pengirim`) VALUES
+(28, '420/45/422.101/2020', 'Kegiatan 1', '2020-01-23', 'Dinas', 'Dinas'),
+(29, '420/44/422.101/2020', 'Kegiatan 2', '2020-01-28', 'Dinas', 'Dinas');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `surat_masuk`
+--
+
+CREATE TABLE `surat_masuk` (
+  `id_masuk` int(16) NOT NULL,
+  `nomor_surat` varchar(30) NOT NULL,
+  `perihal` varchar(50) NOT NULL,
+  `tanggal` date NOT NULL,
+  `pengirim` varchar(50) NOT NULL,
+  `penerima` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `surat_masuk`
+--
+
+INSERT INTO `surat_masuk` (`id_masuk`, `nomor_surat`, `perihal`, `tanggal`, `pengirim`, `penerima`) VALUES
+(3, '420/40/422.101/2020', 'Kegiatan 1', '2020-01-23', 'Dinas', 'Dinas'),
+(4, '420/41/422.101/2020', 'Kegiatan 2', '2020-01-28', 'Dinas', 'Dinas');
 
 -- --------------------------------------------------------
 
@@ -66,9 +114,11 @@ CREATE TABLE `tbl_menu` (
 
 INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `is_aktif`) VALUES
 (1, 'KELOLA MENU', 'kelolamenu', 'fa fa-server', 0, 'y'),
-(2, 'KELOLA PENGGUNA', 'user', 'fa fa-user-o', 0, 'y'),
 (3, 'level PENGGUNA', 'userlevel', 'fa fa-users', 0, 'y'),
-(9, 'Contoh Form', 'welcome/form', 'fa fa-id-card', 0, 'y');
+(9, 'Contoh Form', 'welcome/form', 'fa fa-id-card', 0, 'y'),
+(11, 'KELOLA PENGGUNA', 'user', 'fa fa-user-o', 0, 'y'),
+(12, 'Surat Masuk', 'surat_masuk', 'fa fa-server', 0, 'y'),
+(13, 'Surat Keluar', 'surat_keluar', 'fa fa-server', 0, 'y');
 
 -- --------------------------------------------------------
 
@@ -87,7 +137,7 @@ CREATE TABLE `tbl_setting` (
 --
 
 INSERT INTO `tbl_setting` (`id_setting`, `nama_setting`, `value`) VALUES
-(1, 'Tampil Menu', 'ya');
+(1, 'Tampil Menu', 'tidak');
 
 -- --------------------------------------------------------
 
@@ -111,7 +161,8 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`id_users`, `full_name`, `email`, `password`, `images`, `id_user_level`, `is_aktif`) VALUES
 (1, 'Nuris Akbar M.Kom', 'nuris.akbar@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', 'atomix_user31.png', 1, 'y'),
-(3, 'Muhammad hafidz Muzaki', 'hafid@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', '7.png', 2, 'y');
+(3, 'Muhammad hafidz Muzaki', 'hafid@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', '7.png', 2, 'y'),
+(7, 'Reinaldo Hardana', 'reinaldohardana@gmail.com', '$2y$04$mHTS8Eqbnm9S0hPkDSQz7OxMU5tWLhJ0DsTmO4KfZDJrZFQO0w2JK', 'PhotoGrid_1467027764313.jpg', 1, 'y');
 
 -- --------------------------------------------------------
 
@@ -137,64 +188,94 @@ INSERT INTO `tbl_user_level` (`id_user_level`, `nama_level`) VALUES
 --
 
 --
--- Indexes for table `tbl_hak_akses`
+-- Indeks untuk tabel `surat_keluar`
+--
+ALTER TABLE `surat_keluar`
+  ADD PRIMARY KEY (`id_keluar`);
+
+--
+-- Indeks untuk tabel `surat_masuk`
+--
+ALTER TABLE `surat_masuk`
+  ADD PRIMARY KEY (`id_masuk`);
+
+--
+-- Indeks untuk tabel `tbl_hak_akses`
 --
 ALTER TABLE `tbl_hak_akses`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_menu`
+-- Indeks untuk tabel `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
   ADD PRIMARY KEY (`id_menu`);
 
 --
--- Indexes for table `tbl_setting`
+-- Indeks untuk tabel `tbl_setting`
 --
 ALTER TABLE `tbl_setting`
   ADD PRIMARY KEY (`id_setting`);
 
 --
--- Indexes for table `tbl_user`
+-- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_users`);
 
 --
--- Indexes for table `tbl_user_level`
+-- Indeks untuk tabel `tbl_user_level`
 --
 ALTER TABLE `tbl_user_level`
   ADD PRIMARY KEY (`id_user_level`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_hak_akses`
+-- AUTO_INCREMENT untuk tabel `surat_keluar`
+--
+ALTER TABLE `surat_keluar`
+  MODIFY `id_keluar` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT untuk tabel `surat_masuk`
+--
+ALTER TABLE `surat_masuk`
+  MODIFY `id_masuk` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_hak_akses`
 --
 ALTER TABLE `tbl_hak_akses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
--- AUTO_INCREMENT for table `tbl_menu`
+-- AUTO_INCREMENT untuk tabel `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
--- AUTO_INCREMENT for table `tbl_setting`
+-- AUTO_INCREMENT untuk tabel `tbl_setting`
 --
 ALTER TABLE `tbl_setting`
   MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
--- AUTO_INCREMENT for table `tbl_user_level`
+-- AUTO_INCREMENT untuk tabel `tbl_user_level`
 --
 ALTER TABLE `tbl_user_level`
   MODIFY `id_user_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
