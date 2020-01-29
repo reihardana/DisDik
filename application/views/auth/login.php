@@ -7,7 +7,7 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!--===============================================================================================-->
-        <link rel="icon" type="image" href="<?php echo base_url('assets/img/disdik.png');?>">	
+        <link rel="icon" type="image" href="<?php echo base_url('assets/img/logobatu.png');?>">	
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/login/css/bootstrap.min.css');?>">
         <!--===============================================================================================-->
