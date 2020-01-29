@@ -39,12 +39,15 @@
             <div class="container-login100">
 			    <div class="wrap-login100">
 				    <div class="login100-pic js-tilt tulisan" data-tilt>
-					    <img style="margin-top: -50px" src="<?= base_url('assets/img/logobatu.svg')?>" alt="">
-                 </div>
+					    <img style="margin-top: -30px;" src="<?= base_url('assets/img/logobatu.svg')?>" alt="">
+                    </div>
             <!-- /.login-logo -->
         <div class="login100-form validate-form">
-            <span class="login100-form-title">
-					Silahkan Login
+            
+            <span class="login100-form-title" style="margin-top: -25px">
+                    DINAS PENDIDIKAN <br>
+                    <h4>PROGRAM PENGARSIPAN SURAT</h4>
+                    <h5 style="margin-top: 50px; margin-bottom: -40px">SILAHKAN LOGIN</h5>
 				</span>
                     <?php
                     $status_login = $this->session->userdata('status_login');
@@ -77,10 +80,10 @@
                 <div class="container-login100-form-btn">
                         <input class="login100-form-btn" type="Submit" name="Submit" value="Login">
                     </div>
-                <div class="container-login100-form-btn">
+                <!-- <div class="container-login100-form-btn">
                         <?php echo anchor('#', '<i class="fa fa-eye-slash" aria-hidden="true"></i> Lupa Password', array('class' => 'btn btn-primary btn-block btn-flat')); ?>
-                    </div>
-                <div class="text-center p-t-90">
+                    </div> -->
+                <div class="text-center p-t-125">
                 <!-- <div class="row" style="margin-top: 20px;">
                     <div class="col-xs-12">
                         <div class="callout callout-info">

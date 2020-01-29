@@ -61,12 +61,15 @@ class Surat_keluar extends CI_Controller
     public function create_action() 
     {
         $this->_rules();
+        $input_nomor = $this->input->post('nomor_surat',TRUE);
+        $format1 = '420/';
+        $format2 = '/422.101' . '/' . date('Y');
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
             $data = array(
-		'nomor_surat' => $this->input->post('nomor_surat',TRUE),
+		'nomor_surat' => $format1 . $input_nomor . $format2,
 		'perihal' => $this->input->post('perihal',TRUE),
 		'tanggal' => $this->input->post('tanggal',TRUE),
 		'penerima' => $this->input->post('penerima',TRUE),
