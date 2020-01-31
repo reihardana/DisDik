@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Jan 2020 pada 18.34
--- Versi server: 10.1.31-MariaDB
--- Versi PHP: 7.2.3
+-- Waktu pembuatan: 31 Jan 2020 pada 03.22
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,10 +31,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `surat_keluar` (
   `id_keluar` int(16) NOT NULL,
   `nomor_surat` varchar(30) NOT NULL,
-  `perihal` varchar(50) NOT NULL,
+  `perihal` varchar(200) NOT NULL,
   `tanggal` date NOT NULL,
-  `penerima` varchar(50) NOT NULL,
-  `pengirim` varchar(50) NOT NULL
+  `penerima` varchar(100) NOT NULL,
+  `pengirim` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,7 +43,8 @@ CREATE TABLE `surat_keluar` (
 
 INSERT INTO `surat_keluar` (`id_keluar`, `nomor_surat`, `perihal`, `tanggal`, `penerima`, `pengirim`) VALUES
 (28, '420/45/422.101/2020', 'Kegiatan 1', '2020-01-23', 'Dinas', 'Dinas'),
-(29, '420/44/422.101/2020', 'Kegiatan 2', '2020-01-28', 'Dinas', 'Dinas');
+(29, '420/44/422.101/2020', 'Kegiatan 2', '2020-01-28', 'Dinas', 'Dinas'),
+(30, '420/44/422.101/2020', 'COBA', '2020-01-29', 'Dinas', 'Dinas');
 
 -- --------------------------------------------------------
 
@@ -54,10 +55,10 @@ INSERT INTO `surat_keluar` (`id_keluar`, `nomor_surat`, `perihal`, `tanggal`, `p
 CREATE TABLE `surat_masuk` (
   `id_masuk` int(16) NOT NULL,
   `nomor_surat` varchar(30) NOT NULL,
-  `perihal` varchar(50) NOT NULL,
+  `perihal` varchar(200) NOT NULL,
   `tanggal` date NOT NULL,
-  `pengirim` varchar(50) NOT NULL,
-  `penerima` varchar(50) NOT NULL
+  `pengirim` varchar(100) NOT NULL,
+  `penerima` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -87,11 +88,14 @@ CREATE TABLE `tbl_hak_akses` (
 INSERT INTO `tbl_hak_akses` (`id`, `id_user_level`, `id_menu`) VALUES
 (15, 1, 1),
 (19, 1, 3),
-(21, 2, 1),
 (24, 1, 9),
-(28, 2, 3),
 (29, 2, 2),
-(30, 1, 2);
+(30, 1, 2),
+(31, 2, 12),
+(32, 2, 13),
+(37, 1, 11),
+(38, 1, 12),
+(39, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -115,7 +119,6 @@ CREATE TABLE `tbl_menu` (
 INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `is_aktif`) VALUES
 (1, 'KELOLA MENU', 'kelolamenu', 'fa fa-server', 0, 'y'),
 (3, 'level PENGGUNA', 'userlevel', 'fa fa-users', 0, 'y'),
-(9, 'Contoh Form', 'welcome/form', 'fa fa-id-card', 0, 'y'),
 (11, 'KELOLA PENGGUNA', 'user', 'fa fa-user-o', 0, 'y'),
 (12, 'Surat Masuk', 'surat_masuk', 'fa fa-server', 0, 'y'),
 (13, 'Surat Keluar', 'surat_keluar', 'fa fa-server', 0, 'y');
@@ -137,7 +140,7 @@ CREATE TABLE `tbl_setting` (
 --
 
 INSERT INTO `tbl_setting` (`id_setting`, `nama_setting`, `value`) VALUES
-(1, 'Tampil Menu', 'tidak');
+(1, 'Tampil Menu', 'ya');
 
 -- --------------------------------------------------------
 
@@ -160,9 +163,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_users`, `full_name`, `email`, `password`, `images`, `id_user_level`, `is_aktif`) VALUES
-(1, 'Nuris Akbar M.Kom', 'nuris.akbar@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', 'atomix_user31.png', 1, 'y'),
-(3, 'Muhammad hafidz Muzaki', 'hafid@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', '7.png', 2, 'y'),
-(7, 'Reinaldo Hardana', 'reinaldohardana@gmail.com', '$2y$04$mHTS8Eqbnm9S0hPkDSQz7OxMU5tWLhJ0DsTmO4KfZDJrZFQO0w2JK', 'PhotoGrid_1467027764313.jpg', 1, 'y');
+(7, 'Reinaldo Hardana', 'reinaldohardana@gmail.com', '$2y$04$mHTS8Eqbnm9S0hPkDSQz7OxMU5tWLhJ0DsTmO4KfZDJrZFQO0w2JK', 'PhotoGrid_1467027764313.jpg', 2, 'y'),
+(8, 'Fangki Yudhodiharjo', 'fangkiyudho@gmail.com', '$2y$04$nKxBqJ7fv7HDhEQBJZclzORR7rYX5F6s63zWpAB0F0pBI7.ZxRp.K', 'disdik.png', 1, 'y'),
+(9, 'Yonthan', 'yonathantobias@gmail.com', '$2y$04$eQNUdBXTqvMDSkSNkyqS1eef6lEsxy9jxdfmGK/TLLddnRJEOoasK', '59e60aeaae653a34fe0e9633.jpeg', 2, 'y');
 
 -- --------------------------------------------------------
 
@@ -237,7 +240,7 @@ ALTER TABLE `tbl_user_level`
 -- AUTO_INCREMENT untuk tabel `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
-  MODIFY `id_keluar` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_keluar` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `surat_masuk`
@@ -249,7 +252,7 @@ ALTER TABLE `surat_masuk`
 -- AUTO_INCREMENT untuk tabel `tbl_hak_akses`
 --
 ALTER TABLE `tbl_hak_akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_menu`
@@ -267,7 +270,7 @@ ALTER TABLE `tbl_setting`
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user_level`
