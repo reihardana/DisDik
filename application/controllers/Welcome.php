@@ -3,11 +3,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
-
-
     public function index() {
         //$this->load->view('table');
-        $this->template->load('template', 'welcome');
+        $this->load->model('surat_masuk_model');
+        $this->load->model('surat_keluar_model');
+        $this->load->model('user_model');
+        $template_data['jml_user'] = $this->user_model->total_rows();
+		$template_data['jml_surat_masuk'] = $this->surat_masuk_model->total_rows();
+		$template_data['jml_surat_keluar'] = $this->surat_keluar_model->total_rows();
+        $this->template->load('template', 'welcome', $template_data);
     }
 
     public function form() {
