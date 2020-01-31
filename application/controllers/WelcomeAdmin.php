@@ -2,32 +2,15 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class WelcomeAdmin extends CI_Controller {
     public function index() {
         is_login();
-        //$this->load->view('table');
         $this->load->model('surat_masuk_model');
         $this->load->model('surat_keluar_model');
-        $this->load->model('user_model');
-        $this->load->model('user_level_model');
-        $template_data['jml_user'] = $this->user_model->total_rows();
 		$template_data['jml_surat_masuk'] = $this->surat_masuk_model->total_rows();
         $template_data['jml_surat_keluar'] = $this->surat_keluar_model->total_rows();
-
-
-        // $index = 0;
-		// foreach ($posisi as $value) {
-		//     $color = '#' .$rand[rand(0,15)] .$rand[rand(0,15)] .$rand[rand(0,15)] .$rand[rand(0,15)] .$rand[rand(0,15)] .$rand[rand(0,15)];
-
-		// 	$data_posisi[$index]['value'] = $pegawai_by_posisi->jml;
-		// 	$data_posisi[$index]['color'] = $color;
-		// 	$data_posisi[$index]['highlight'] = $color;
-		// 	$data_posisi[$index]['label'] = $value->nama;
-			
-		// 	$index++;
-        // }
         
-        $this->template->load('template', 'welcome', $template_data);
+        $this->template->load('template', 'welcomeadmin', $template_data);
     }
 
     public function form() {
